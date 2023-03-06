@@ -1,4 +1,5 @@
-import {userSlectTopping} from "./functions.js"
+import {fillUserInfo, userSlectTopping} from "./functions.js"
+import { pizzaSelectUser } from "./index.js"
 
 export function clickInputSize(e) {
     if(e.target.tagName === "INPUT"){
@@ -18,5 +19,11 @@ export const clickSauceAdd = (e)=> {
     }
 }
 
-
-
+export const clickSubmit = (e) => {
+    if (pizzaSelectUser.price>0) {
+        fillUserInfo(e);
+        console.log(pizzaSelectUser);
+    }else{
+        console.error(`Pizza hasn't been built.`);
+    }
+}

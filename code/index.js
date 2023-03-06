@@ -1,4 +1,5 @@
-import {clickInputSize, clickSauceAdd, clickToppingAdd} from "./functionEvent.js"
+import {clickInputSize, clickSauceAdd, clickSubmit, clickToppingAdd} from "./functionEvent.js"
+import {getUserInfoFields, validation, cleanValidation} from "./formValidation.js"
 import pizza from "./pizza.js";
 
 document.getElementById("pizza")
@@ -21,3 +22,14 @@ export const pizzaSelectUser = {
    price : 0
 }
 
+getUserInfoFields().forEach( el => el.addEventListener('blur', validation));
+
+document.getElementById('reset').addEventListener('click', cleanValidation);
+
+document.getElementById('btnSubmit').addEventListener('click', clickSubmit);
+
+export const userInfo = {
+    name:"",
+    phone:"",
+    email:""
+}

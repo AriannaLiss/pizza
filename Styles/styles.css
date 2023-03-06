@@ -405,3 +405,12 @@ footer > form > div > p {
     flex-direction: column;
     display: flex;
 }
+
+.valid{
+    border: 3px solid green;
+}
+
+
+.invalid{
+    border: 3px solid red;
+}

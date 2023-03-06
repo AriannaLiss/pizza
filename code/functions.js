@@ -1,4 +1,5 @@
-import { pizzaSelectUser } from "./index.js";
+import { getUserInfoFields, validateField } from "./formValidation.js";
+import { pizzaSelectUser, userInfo } from "./index.js";
 import pizza from "./pizza.js";
 
 function userSlectTopping(topping) {
@@ -13,6 +14,18 @@ function userSlectTopping(topping) {
     }
     pizzaSelectUser.price = evaluate(pizzaSelectUser);
     show(pizzaSelectUser);
+}
+
+function fillUserInfo() {
+    let err = false
+    const validation = getUserInfoFields().forEach((field) =>{
+        if(!validateField(field)) { 
+            console.error(`Field ${field.name} is invalid.`);
+            err = true;
+        }
+        userInfo[field.name] = field.value;
+    });
+    err ? console.error('Please fill all fealds.') : console.log(userInfo);
 }
 
 function evaluate(pizza) {
@@ -66,7 +79,6 @@ function showTopping(topping, coefficient){
         toppingList.appendChild(li);
     });
     document.getElementById("topping").appendChild(toppingList);
-
 }
 
-export { userSlectTopping }
+export { userSlectTopping, fillUserInfo }
