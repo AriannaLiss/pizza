@@ -42,6 +42,14 @@ li {
     padding: 0 15px;
 }
 
+#toppingList{
+    padding:0;
+}
+
+#toppingList>li{
+    display: block;
+}
+
 li:hover {
     color: var(--main);
     cursor: pointer;
@@ -204,6 +212,7 @@ input[type="radio"], input[type="checkbox"] {
     flex-wrap: nowrap;
     justify-content: space-evenly;
     padding: 3em;
+    gap: 1rem;
 }
 
 p {
@@ -388,7 +397,11 @@ footer > form > div > p {
     }
 }
 
+.price-list { 
+    margin-left: 15px;
+}
+
 #sauce{
-    display: inline-flex;
     flex-direction: column;
+    display: flex;
 }

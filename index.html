@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Піцерія Domino's Pizza</title>
+    <link rel="shortcut icon" href="./Pizza_pictures/favicon.webp" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./Styles/styles.css">
     <script src="./code/index.js" type="module"></script>
@@ -34,7 +35,7 @@
         <form id='pizza' action="">
             <label class="radio"><input type="radio" class="radioIn" id="small" name="size" value="small"><span class="fakeRadio"></span><span>Маленька</span></label>
             <label class="radio"><input type="radio" class="radioIn" id="mid" name="size" value="mid"><span class="fakeRadio"></span><span>Середня</span></label>
-            <label class="radio"><input type="radio" class="radioIn" id="big" name="size" value="big"><span class="fakeRadio"></span><span>Велика</span></label>
+            <label class="radio"><input type="radio" class="radioIn" id="big" name="size" value="big" checked><span class="fakeRadio"></span><span>Велика</span></label>
         </form>
         <div class="table-wrapper">
             <div class="table">
@@ -75,7 +76,8 @@
         </div>
         <div class="result">
             <div class="price"><p>Цiна: <span id="price"></span> </p></div>
-            <div class="sauces"><div>Соуси: <div id="sauce"></div></div></div>
+            <div class="base"><div>Основа: <div id="base" class="price-list"></div></div></div>
+            <div class="sauces"><div>Соус: <div id="sauce" class="price-list"></div></div></div>
             <div class="topings"><div>Топiнги: <div id="topping"></div> </div></div>
         </div>
     </main>

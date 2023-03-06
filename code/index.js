@@ -1,4 +1,5 @@
 import {clickInputSize, clickSauceAdd, clickToppingAdd} from "./functionEvent.js"
+import pizza from "./pizza.js";
 
 document.getElementById("pizza")
     .addEventListener("click", clickInputSize);
@@ -14,7 +15,7 @@ document.querySelectorAll(".sauce")
 })
 
 export const pizzaSelectUser = {
-   size : "",
+   size : pizza.size[pizza.size.length -1],
    topping : [],
    sauce : "",
    price : 0
