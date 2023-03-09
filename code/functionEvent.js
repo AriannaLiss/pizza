@@ -1,4 +1,4 @@
-import {fillUserInfo, userSlectTopping} from "./functions.js"
+import {fillUserInfo, userSlectTopping, putIngridient} from "./functions.js"
 import { pizzaSelectUser } from "./index.js"
 
 export function clickInputSize(e) {
@@ -26,4 +26,21 @@ export const clickSubmit = (e) => {
     }else{
         console.error(`Pizza hasn't been built.`);
     }
+}
+
+export const dragstartTopping = (e) => {
+    if(e.target.tagName === "IMG"){
+        const imgURL = e.target.src
+        e.dataTransfer.setData("image/png", imgURL);
+        e.dataTransfer.setData("text/uri-list", imgURL);
+        e.dataTransfer.setData("text/plain", e.target.id);
+    }
+}
+
+export const dropIngridient = (e) => {
+    const id = e.dataTransfer.getData("text/plain");
+    if (!id) return;
+    userSlectTopping(id);
+    putIngridient(e);
+    e.preventDefault();
 }

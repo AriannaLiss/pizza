@@ -81,4 +81,27 @@ function showTopping(topping, coefficient){
     document.getElementById("topping").appendChild(toppingList);
 }
 
-export { userSlectTopping, fillUserInfo }
+const getDataTransferImgURL = (e) =>{
+    const supportTypes = ["image/png", "text/uri-list"];
+    const types = supportTypes.filter((type) => 
+        e.dataTransfer.types.includes(type));
+    let data;
+    if (types.length) {
+        let i=0;
+        while (i<types.length && !data) {
+            data = e.dataTransfer.getData(types[i]);
+            i++;
+        }
+    }
+    return data;
+}
+
+const putIngridient = (e) => {
+    const img = document.createElement("img");
+    img.src = getDataTransferImgURL(e);
+    img.class = "table-ingridient";
+    img.draggable = false;
+    document.getElementById('table').appendChild(img);
+}
+
+export { userSlectTopping, fillUserInfo, putIngridient }
