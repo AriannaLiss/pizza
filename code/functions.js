@@ -2,19 +2,81 @@ import { getUserInfoFields, validateField } from "./formValidation.js";
 import { pizzaSelectUser, userInfo } from "./index.js";
 import pizza from "./pizza.js";
 
-function userSlectTopping(topping) {
-    if ("smallmidbig".includes(topping)) {
+const SAUCE_ON_PIZZA_CLASS = "sauce-on-pizza";
+const TOPPING_ON_PIZZA_CLASS = "topping-on-pizza";
+
+const isSauce = id => "sauceClassicsauceBBQsauceRikotta".includes(id);
+const isTopping = id => "moc1moc2moc3telyavetch1vetch2".includes(id);
+const isSize = id => "smallmidbig".includes(id);
+
+function userSlectTopping(e) {
+    let id = getID(e);
+    if (!id) return;
+    if (isSize(id)) {
         pizzaSelectUser.size = pizza.size.find((el) => {
-            return el.name === topping
+            return el.name === id
         })
-    } else if ("moc1moc2moc3telyavetch1vetch2".includes(topping)) {
-        pizzaSelectUser.topping.push(pizza.topping.find(el => el.name === topping))
-    } else if ("sauceClassicsauceBBQsauceRikotta".includes(topping)) {
-        pizzaSelectUser.sauce = pizza.sauce.find(el => el.name === topping)
+    } else if (isTopping(id)) {
+        pizzaSelectUser.topping.push(pizza.topping.find(el => el.name === id))
+        putTopping(e);
+    } else if (isSauce(id)) {
+        pizzaSelectUser.sauce = pizza.sauce.find(el => el.name === id)
+        putSauce(e);
     }
     pizzaSelectUser.price = evaluate(pizzaSelectUser);
     show(pizzaSelectUser);
 }
+
+const getID = (e) => {
+    let id;
+    if (e.dataTransfer) {
+        id = e.dataTransfer.getData("text/plain"); //topping is added
+    } else { 
+        id = e.target.value;  //size is chosen
+    };
+    return id
+}
+
+// table (pizza picture)
+
+const putTopping = (e) => {
+    document.getElementById('table').appendChild(
+        createImg(getDataTransferImgURL(e), TOPPING_ON_PIZZA_CLASS)
+    );
+}
+
+const putSauce = (e) => {
+    const table = document.getElementById('table');
+    const img = createImg(getDataTransferImgURL(e), SAUCE_ON_PIZZA_CLASS);
+    const sauce = document.getElementsByClassName(SAUCE_ON_PIZZA_CLASS)[0];
+    sauce ? table.replaceChild(img,sauce)
+        : table.insertBefore(img, table.children[1]);
+}
+
+const getDataTransferImgURL = (e) =>{
+    const supportTypes = ["image/png", "text/uri-list"];
+    const types = supportTypes.filter((type) => 
+        e.dataTransfer.types.includes(type));
+    let data;
+    if (types.length) {
+        let i=0;
+        while (i<types.length && !data) {
+            data = e.dataTransfer.getData(types[i]);
+            i++;
+        }
+    }
+    return data;
+}
+
+const createImg = (imgURL, type) => {
+    const img = document.createElement("img");
+    img.src = imgURL;
+    img.classList.add(type);
+    img.draggable = false;
+    return img;
+}
+
+//form
 
 function fillUserInfo() {
     let err = false
@@ -81,27 +143,4 @@ function showTopping(topping, coefficient){
     document.getElementById("topping").appendChild(toppingList);
 }
 
-const getDataTransferImgURL = (e) =>{
-    const supportTypes = ["image/png", "text/uri-list"];
-    const types = supportTypes.filter((type) => 
-        e.dataTransfer.types.includes(type));
-    let data;
-    if (types.length) {
-        let i=0;
-        while (i<types.length && !data) {
-            data = e.dataTransfer.getData(types[i]);
-            i++;
-        }
-    }
-    return data;
-}
-
-const putIngridient = (e) => {
-    const img = document.createElement("img");
-    img.src = getDataTransferImgURL(e);
-    img.class = "table-ingridient";
-    img.draggable = false;
-    document.getElementById('table').appendChild(img);
-}
-
-export { userSlectTopping, fillUserInfo, putIngridient }
+export { userSlectTopping, fillUserInfo }

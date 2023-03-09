@@ -1,8 +1,8 @@
 const pizza = {
     size : [
-        {name : "small", price : 40, coefficient: 0.6, sizeName: 'Маленька'},
-        {name : "mid", price: 55, coefficient: 0.8, sizeName: 'Середня'},
-        {name : "big", price: 70, coefficient: 1, sizeName: 'Велика'}
+        {name : "small", price : 40, coefficient: 1, sizeName: 'Маленька'},
+        {name : "mid", price: 55, coefficient: 1.5, sizeName: 'Середня'},
+        {name : "big", price: 70, coefficient: 2, sizeName: 'Велика'}
     ],
     topping: [
         {name : "moc1",   price: 50, productName: "Сир звичайний"},

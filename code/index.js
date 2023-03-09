@@ -1,4 +1,4 @@
-import {clickInputSize, clickSubmit, dragstartTopping, dropIngridient} from "./functionEvent.js"
+import {clickInputSize, clickSubmit, dragstartIngridient, dropIngridient} from "./functionEvent.js"
 import {getUserInfoFields, validation, cleanValidation} from "./formValidation.js"
 import pizza from "./pizza.js";
 
@@ -7,12 +7,12 @@ document.getElementById("pizza")
 
 document.querySelectorAll(".topping")
     .forEach((div)=>{
-        div.addEventListener("dragstart", dragstartTopping)
+        div.addEventListener("dragstart", dragstartIngridient)
 });
 
 document.querySelectorAll(".sauce")
     .forEach((div)=>{
-        div.addEventListener("dragstart", dragstartTopping)
+        div.addEventListener("dragstart", dragstartIngridient)
 });
 
 const table = document.getElementById("table");
@@ -24,7 +24,7 @@ table.addEventListener("dragenter", (e) => e.preventDefault());
 table.addEventListener("drop", dropIngridient);
 
 export const pizzaSelectUser = {
-   size : pizza.size[pizza.size.length -1],
+   size : pizza.size[pizza.size.length - 1],
    topping : [],
    sauce : "",
    price : 0
